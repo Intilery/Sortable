@@ -542,7 +542,7 @@
 						rootEl.insertBefore(dragEl, cloneEl || nextEl);
 					}
 					else if (!canSort) {
-						try { rootEl.appendChild(dragEl); } catch(e) { }
+						try { rootEl.appendChild(dragEl); } catch (e) { }
 					}
 
 					return;
