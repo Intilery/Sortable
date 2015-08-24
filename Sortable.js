@@ -602,7 +602,7 @@
 						}
 
 						if (after && !nextSibling) {
-							el.appendChild(dragEl);
+							try { el.appendChild(dragEl); } catch (e) { }
 						} else {
 							target.parentNode.insertBefore(dragEl, after ? nextSibling : target);
 						}
