@@ -466,7 +466,7 @@
 				_css(ghostEl, 'position', 'fixed');
 				_css(ghostEl, 'zIndex', '100000');
 
-				rootEl.appendChild(ghostEl);
+				try { rootEl.appendChild(ghostEl); } catch (e) { return; }
 
 				// Fixing dimensions.
 				ghostRect = ghostEl.getBoundingClientRect();
@@ -542,7 +542,7 @@
 						rootEl.insertBefore(dragEl, cloneEl || nextEl);
 					}
 					else if (!canSort) {
-						try { rootEl.appendChild(dragEl); } catch (e) { }
+						try { rootEl.appendChild(dragEl); } catch (e) { return; }
 					}
 
 					return;
@@ -562,7 +562,7 @@
 					_cloneHide(isOwner);
 
 					if (_onMove(rootEl, el, dragEl, dragRect, target, targetRect) !== false) {
-						el.appendChild(dragEl);
+						try { el.appendChild(dragEl); } catch (e) { return; }
 						this._animate(dragRect, dragEl);
 						target && this._animate(targetRect, target);
 					}
@@ -602,7 +602,7 @@
 						}
 
 						if (after && !nextSibling) {
-							try { el.appendChild(dragEl); } catch (e) { }
+							try { el.appendChild(dragEl); } catch (e) { return; }
 						} else {
 							target.parentNode.insertBefore(dragEl, after ? nextSibling : target);
 						}
