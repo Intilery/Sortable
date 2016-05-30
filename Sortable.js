@@ -510,6 +510,7 @@
 				_css(ghostEl, 'zIndex', '100000');
 				_css(ghostEl, 'pointerEvents', 'none');
 
+				// TODO this might need wrapping in try/catch
 				options.fallbackOnBody && document.body.appendChild(ghostEl) || rootEl.appendChild(ghostEl);
 
 				// Fixing dimensions.
@@ -602,7 +603,7 @@
 						rootEl.insertBefore(dragEl, cloneEl || nextEl);
 					}
 					else if (!canSort) {
-						rootEl.appendChild(dragEl);
+						try { rootEl.appendChild(dragEl); } catch (e) { return; }
 					}
 
 					return;
@@ -624,6 +625,7 @@
 					_cloneHide(isOwner);
 
 					if (_onMove(rootEl, el, dragEl, dragRect, target, targetRect) !== false) {
+						// TODO TEST THIS
 						if (!dragEl.contains(el)) {
 							el.appendChild(dragEl);
 							parentEl = el; // actualization
@@ -676,6 +678,7 @@
 							after = (nextSibling !== dragEl) && !isLong || halfway && isLong;
 						}
 
+						// TODO TEST THIS
 						if (!dragEl.contains(el)) {
 							if (after && !nextSibling) {
 								el.appendChild(dragEl);
